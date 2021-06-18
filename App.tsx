@@ -1,21 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import Home from './src/index';
+
+import { createStackNavigator } from '@react-navigation/stack'
+import { RootStackParamList } from './src/navigator/snack-config';
+import { NavigationContainer } from '@react-navigation/native';
+import DetailsImage from './src/screen/DetaisImage';
+
+
+const Root = createStackNavigator<RootStackParamList>()
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Root.Navigator initialRouteName="Home">
+        <Root.Screen name="Home" component={Home} />
+        <Root.Screen 
+          name="DetaisImage" 
+          component={DetailsImage} 
+          options={{
+            title: 'Detalhes da Imagem',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}  
+        />
+      </Root.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
